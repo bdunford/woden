@@ -1,0 +1,4 @@
+requests
+pyOpenSSL
+requests_ntlm
+dnspython
