@@ -1,5 +1,6 @@
 *.pyc
 testdata
 .env-lin
+.env-osx
 *.swp
 *.swo
