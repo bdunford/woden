@@ -32,7 +32,6 @@ class TestThreader(unittest.TestCase):
         rt = int(time.time() - st)
 
         self.assertEqual(len(marker.results),threads)
-        print rt
         self.assertLessEqual(rt,sleep_time)
 
 
