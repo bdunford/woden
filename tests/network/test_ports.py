@@ -8,6 +8,8 @@ class TestPort(unittest.TestCase):
         p = Port.Connect("google.com",80)
         x = p.send("GET / HTTP/1.1\n\n")
         self.assertIn("HTTP/1.1 200 OK",x)
+        p.disconnect()
+
 
 
 suite = unittest.TestLoader().loadTestsFromTestCase(TestPort)

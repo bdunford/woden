@@ -2,5 +2,7 @@
 testdata
 .env-lin
 .env-osx
+.env-py2
+.env-py3
 *.swp
 *.swo

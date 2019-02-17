@@ -1,5 +1,6 @@
 import socket
 import ssl
+import sys
 
 class Port():
 
@@ -32,8 +33,7 @@ class Port():
         try:
             self._socket.connect(self._address);
             return True
-        except socket.error, e:
-            self.error = e
+        except socket.error as e:
             return False
 
     def disconnect(self):
@@ -42,11 +42,11 @@ class Port():
     def send(self, data, lt='\r\n'):
         if lt:
             data += lt
-        self._socket.send(data)
+        self._socket.send(data.encode())
         return self.read()
 
     def read(self, chunk=1024):
-        data = ""
+        data = b''
         try:
             while True:
                 part = self._socket.recv(chunk)
@@ -54,10 +54,15 @@ class Port():
                     data += part
                 if len(part) < chunk:
                     break
-        except:
+        except Exception as e:
+            self._error = e
             pass
         finally:
-            return data.rstrip() if len(data) > 0 else None
+            if len(data) > 0: 
+                return data.rstrip() if sys.version_info[0] < 3 else data.decode().rstrip()
+            else: 
+                return None
+            
 
     @classmethod
     def Sniff(self, ip, port, banner=True):

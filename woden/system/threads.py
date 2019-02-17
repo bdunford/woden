@@ -71,7 +71,7 @@ class Threader(object):
                     if not self.isKilled:
                         self.onSucess(r)
 
-        except Exception, e:
+        except Exception as e:
             if self.onError:
                 with self.elock:
                     self.onError(e)

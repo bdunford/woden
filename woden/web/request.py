@@ -43,7 +43,7 @@ class Request(object):
 
         session = requests.Session()
 
-        for k,v in Request.defaults.iteritems():
+        for k,v in Request.defaults.items():
             kwargs.setdefault(k,v)
 
         if method in ('head','options') :
@@ -51,7 +51,7 @@ class Request(object):
 
         try:
             return session.request(method,url,**kwargs)
-        except Exception, ex:
+        except Exception as  ex:
             if type(ex).__name__ == "SSLError":
                 session.mount('https://', SSLAdapter(ssl.PROTOCOL_TLSv1))
                 return session.request(method,url,**kwargs)

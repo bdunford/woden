@@ -31,8 +31,8 @@ class Certificate(object):
 
     def hosts(self):
         hn = list(
-            map(lambda m: m[1], filter(lambda f: len(f) == 2 and f[0] == "CN", self.openSSL.get_subject().get_components())))
-        alts = Lists.First(filter(lambda x: x.get_short_name() == 'subjectAltName',map(lambda i: self.openSSL.get_extension(i), range(self.openSSL.get_extension_count()))))
+            map(lambda m: m[1], filter(lambda f: len(f) == 2 and f[0] == b"CN", self.openSSL.get_subject().get_components())))
+        alts = Lists.First(list(filter(lambda x: x.get_short_name() == b'subjectAltName',map(lambda i: self.openSSL.get_extension(i), range(self.openSSL.get_extension_count())))))
         if alts:
             return list(set(hn + re.sub(r"DNS\:","",alts.__str__()).split(', ')))
         else:

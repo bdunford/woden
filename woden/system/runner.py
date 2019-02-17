@@ -1,6 +1,7 @@
 import re
 import subprocess
 import string
+import sys
 from threading import Timer
 from ..utility import Parse
 
@@ -23,10 +24,26 @@ class Runner(object):
         if timer:
             timer.start()
 
-        r = list(map(lambda x: x.rstrip().replace("\t","     "), iter(p.stdout.readline, b'')))
-        #Need to Flush the Buffer in the Loop
+        
+        r = None 
+        if sys.version_info[0] < 3:
+            r = map(
+                    lambda x: x.rstrip().replace("\t","     "), 
+                    iter(p.stdout.readline, b'')
+                )
+        else: 
+            r = map(
+                    lambda x: x.decode().rstrip().replace("\t","     "), 
+                    iter(p.stdout.readline, b'')
+                )
+
+            
+
+
+        
+
 
         if timer:
             timer.cancel()
 
-        return Runner(r)
+        return Runner(list(r))

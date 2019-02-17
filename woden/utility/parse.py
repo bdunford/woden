@@ -1,5 +1,5 @@
 import re
-
+import sys
 
 class Parse(object):
 
@@ -9,7 +9,12 @@ class Parse(object):
     @staticmethod
     def WithRegex(expr, value):
         x = re.compile(expr)
+        
+        if sys.version_info[0] >= 3 and type(value) == bytes:
+            value = value.decode()
+
         m = x.match(value)
+        
         if m:
             o = Parse()
             if m.groupdict():

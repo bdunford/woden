@@ -17,6 +17,7 @@ setup(name='woden',
     ],
     zip_safe=False,
     install_requires=[
+        'future',
         'pyOpenSSL',
         'requests',
         'requests_ntlm',

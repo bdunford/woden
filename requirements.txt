@@ -1,3 +1,4 @@
+future
 requests
 pyOpenSSL
 requests_ntlm

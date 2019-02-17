@@ -1,8 +1,8 @@
 import smtplib
 from email.message import Message
-from email.MIMEMultipart import MIMEMultipart
-from email.MIMEText import MIMEText
-from email.MIMEBase import MIMEBase
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
 from email import encoders
 import os
 import dns.resolver
@@ -23,7 +23,7 @@ class Mailer(object):
 
     def _get_mail_servers(self, domain):
         servers = list(map(lambda x: {"sort": int(x.preference), "name": x.exchange.to_text().rstrip('.')}, dns.resolver.query(domain, 'MX')))
-        return map(lambda f: f["name"],sorted(servers,key=lambda x: x["sort"]))
+        return list(map(lambda f: f["name"],sorted(servers,key=lambda x: x["sort"])))
 
     def _build_mailing_list(self):
         mail_list = {}
@@ -95,7 +95,7 @@ class Mailer(object):
 
         else: 
             errors = []
-            for k,v in instance._build_mailing_list().iteritems():
+            for k,v in instance._build_mailing_list().items():
                 if not instance._send_message(v["servers"][0],v["recipients"],msg):
                     errors.append(instance.error)
 

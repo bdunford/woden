@@ -13,7 +13,7 @@ class Printer(object):
                 return
 
             if isinstance(mixed,dict):
-                for k in reversed(mixed.keys()):
+                for k in reversed(list(mixed.keys())):
                     if isinstance(mixed[k], (list, tuple)):
                         print("%s: " % k)
                         for v in mixed[k]:
