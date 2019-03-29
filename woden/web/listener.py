@@ -35,7 +35,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         
     def _parse(self,estring):
         parts = estring.split('?')
-        v = parts[1] if len(parts) > 1 else parts[0]
+        qs = parts[1] if len(parts) > 1 else parts[0]
         pairs = qs.split("&")
         results = {}
         for p in pairs: 
