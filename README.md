@@ -1,5 +1,5 @@
 # Woden
-Just a python utility framework for helping with some common tasks.  Some things in here where pointless, others have proven to be useful.
+Just a python utility framework for helping with some common tasks.  Some things in here are pointless, others have proven to be useful.
 
 
 
