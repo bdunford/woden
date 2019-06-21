@@ -6,7 +6,7 @@ class TestHost(unittest.TestCase):
         import woden
         from woden.network import Host
         x = Host.Reverse("8.8.8.8")
-        self.assertIn("google-public-dns-a.google.com",x)
+        self.assertIn("google",''.join(x))
 
 suite = unittest.TestLoader().loadTestsFromTestCase(TestHost)
 if __name__ == '__main__':
