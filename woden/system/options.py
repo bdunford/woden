@@ -36,6 +36,8 @@ class Options(object):
             if v and "validate" in o and o["validate"] and not o["validate"](v):
                 valid = False
                 p.error(o["dest"] + " is invalid")
+
+        x.parser = p
         return x if valid else False
 
     @staticmethod
@@ -92,3 +94,15 @@ class Options(object):
                 "validate" : os.path.exists,
                 "default" : default
                 }
+    @staticmethod
+    def inputList(required=False,default="1-65535"):
+        return {
+            "arg" : '-p',
+            "dest" : "ports",
+            "type" : "string",
+            "help" : "Port number(s) to use 443 or 22,443,80 or 1-1000",
+            "required" : False,
+            "validate" : None,
+            "default" : default
+        }
+

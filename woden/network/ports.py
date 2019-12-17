@@ -82,3 +82,16 @@ class Port():
             return p
         else:
             return None
+
+    @classmethod
+    def Parse(pd):
+        if pd.find("-") > -1:
+            s = map(lambda m: int(m),pd.split("-"))
+            if len(s) == 2:
+                return range(s[0],s[1] + 1)
+            else:
+                False
+        else:
+            return map(lambda m: int(m),pd.split(","))
+
+

@@ -1,9 +1,13 @@
 import ssl
 import re
+import socket
 from OpenSSL import crypto
 from ..utility import Parse, Lists
 ssl._DEFAULT_CIPHERS = 'DEFAULT:!aNULL:!eNULL:!LOW:!EXPORT:!SSLv2'
 
+
+
+#TODO rewrite using https://pypi.org/project/pem/
 class Certificate(object):
 
     def __init__(self, pemCert):
@@ -42,14 +46,15 @@ class Certificate(object):
     def Get(ip, port):
         pem = None
         try:
-            pem = ssl.get_server_certificate((ip,int(port)))
+            address = (ip,int(port))
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.settimeout(2)
+            x = ssl.wrap_socket(sock)
+            x.connect(address)
+            x.do_handshake()
+            pem = ssl.get_server_certificate(address)
+            x.close()
+            return Certificate(pem)
         except:
-            pem = ssl.get_server_certificate(
-                (ip,int(port)),
-                ssl_version=ssl.PROTOCOL_TLSv1
-            )
-        finally:
-            if pem:
-                return Certificate(pem)
-            else:
-                return None
+            return None
+        

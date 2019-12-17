@@ -7,7 +7,7 @@ class TestCertificate(unittest.TestCase):
         from woden.web import Certificate
         c = Certificate.Get("yahoo.com",443)
         self.assertTrue(isinstance(c,Certificate))
-        self.assertIn("www.yahoo.com", c.hosts())
+        self.assertIn("*.yahoo.com", c.hosts())
     
 suite = unittest.TestLoader().loadTestsFromTestCase(TestCertificate)
 if __name__ == '__main__':
