@@ -83,7 +83,7 @@ class Port():
         else:
             return None
 
-    @classmethod
+    @staticmethod
     def Parse(pd):
         if pd.find("-") > -1:
             s = map(lambda m: int(m),pd.split("-"))

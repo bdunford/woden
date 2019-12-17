@@ -10,6 +10,9 @@ class TestPort(unittest.TestCase):
         self.assertIn("HTTP/1.1 200 OK",x)
         p.disconnect()
 
+        
+        pa = Port.Parse("1-4")
+        self.assertEqual(len(pa),4)
 
 
 suite = unittest.TestLoader().loadTestsFromTestCase(TestPort)
