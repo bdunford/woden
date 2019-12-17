@@ -95,7 +95,7 @@ class Options(object):
                 "default" : default
                 }
     @staticmethod
-    def inputList(required=False,default="1-65535"):
+    def ports(required=False,default="1-65535"):
         return {
             "arg" : '-p',
             "dest" : "ports",
